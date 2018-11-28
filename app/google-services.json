@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "760741038388",
+    "firebase_url": "https://jetpackproject-63ca3.firebaseio.com",
+    "project_id": "jetpackproject-63ca3",
+    "storage_bucket": "jetpackproject-63ca3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760741038388:android:130d069ccc33b07a",
+        "android_client_info": {
+          "package_name": "com.example.mahti.jetpackproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760741038388-egdi55i60jl2hq3vthmemkafs3e4ofet.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mahti.jetpackproject",
+            "certificate_hash": "4f4c62fe8ca70fb182d51f0041399bd249e50cce"
+          }
+        },
+        {
+          "client_id": "760741038388-79dhtslkan4sajvl6ic1cj3tvpmgge0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChe8i2nQqx7t6KDqBtJOUwEHPmxI-roG8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760741038388-79dhtslkan4sajvl6ic1cj3tvpmgge0k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
