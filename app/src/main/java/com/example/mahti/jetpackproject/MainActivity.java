@@ -2,6 +2,7 @@ package com.example.mahti.jetpackproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -24,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO You can change the layout manager here.
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL, false));
         // Set the adapter
         adapter = new MainAdapter();
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         for(int item=0; item<10; item++) {
             itemList.add(new CardViewItem()
                     .setcard_pic(R.drawable.contact_pic)
-                    .setcard_name("" + item)
+                    .setcard_name("Name" + item)
                     .setcardPrompt_blood("" + item)
                     .setcard_blood("" + item)
                     .setcardPrompt_allergy("" + item)
