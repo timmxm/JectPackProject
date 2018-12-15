@@ -24,12 +24,12 @@ public class AddContactActivity extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addContract();
+                addContact();
             }
         });
     }
 
-    private void addContract() {
+    private void addContact() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("cards");
         myRef.child("user1").child("allergies").setValue("test");
