@@ -5,7 +5,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +21,21 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private MainAdapter adapter;
+    private ImageView icon_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.icon_user = (ImageView) findViewById(R.id.icon_user);
+        this.icon_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, UserActivity.class);
+                MainActivity.this.startActivity(i);
+            }
+        });
 
         // Bind recycleView
         recyclerView = findViewById(R.id.main_recyclerView);
@@ -34,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Bind adapter to recyclerView
         recyclerView.setAdapter(adapter);
+
+
     }
 
     // Test creating list of items
