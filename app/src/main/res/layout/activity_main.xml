@@ -34,6 +34,7 @@
         app:srcCompat="@drawable/account" />
 
     <androidx.recyclerview.widget.RecyclerView
+        tools:listitem="@layout/card_contact"
         android:id="@+id/main_recyclerView"
         android:layout_width="0dp"
         android:layout_height="450dp"
@@ -43,6 +44,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_appName" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
