@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">NmCrd</string>
     <string name="title_login">Sign in</string>
+    <string name="title_add_info">Add Contact Information</string>
+    <string name="title_edit_info">Edit Contact Information</string>
     <string name="prompt_blood">Blood Type</string>
     <string name="prompt_allergy">Allergy</string>
     <string name="prompt_disease">Underlying Disease</string>
@@ -11,4 +13,5 @@
     <string name="action_logout">Log out"</string>
     <string name="action_register">Register</string>
     <string name="action_edit">Edit Information</string>
+    <string name="action_confirm">Confirm</string>
 </resources>
