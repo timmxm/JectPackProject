@@ -34,15 +34,18 @@
         app:srcCompat="@drawable/account" />
 
     <androidx.recyclerview.widget.RecyclerView
-        tools:listitem="@layout/card_contact"
         android:id="@+id/main_recyclerView"
         android:layout_width="0dp"
         android:layout_height="450dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
+        android:orientation="horizontal"
+        android:scrollbars="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_appName" />
+        app:layout_constraintTop_toBottomOf="@+id/title_appName"
+        app:spanCount="1"
+        tools:listitem="@layout/card_contact" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
