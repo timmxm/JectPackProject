@@ -14,4 +14,11 @@
     <string name="action_register">Register</string>
     <string name="action_edit">Edit Information</string>
     <string name="action_confirm">Confirm</string>
+    <string-array name="bloodType_array">
+        <item>Select Blood Type</item>
+        <item>A</item>
+        <item>B</item>
+        <item>AB</item>
+        <item>O</item>
+    </string-array>
 </resources>
