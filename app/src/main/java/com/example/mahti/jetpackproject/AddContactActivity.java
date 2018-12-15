@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class AddContactActivity extends AppCompatActivity {
+public class AddContactActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,12 @@ public class AddContactActivity extends AppCompatActivity {
                 addContact();
             }
         });
+
+        Spinner bloodTypeSpinner = (Spinner) findViewById(R.id.add_blood);
+        ArrayAdapter<CharSequence> myAdapter = ArrayAdapter.createFromResource(this, R.array.bloodType_array, android.R.layout.simple_spinner_item);
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bloodTypeSpinner.setAdapter(myAdapter);
+        bloodTypeSpinner.setOnItemSelectedListener(this);
     }
 
     private void addContact() {
@@ -36,5 +45,15 @@ public class AddContactActivity extends AppCompatActivity {
         myRef.child("user1").child("bloodType").setValue("test");
         myRef.child("user1").child("underlyingDisease").setValue("test");
         myRef.child("user1").child("name").setValue("test");
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        String text = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
