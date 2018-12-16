@@ -146,6 +146,7 @@ public class EditContactActivity extends AppCompatActivity implements AdapterVie
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("cards");
                             myRef.child(user.getUid() + "/" + "imageUrl").setValue(taskSnapshot.getUploadSessionUri().toString());
+                            finish();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

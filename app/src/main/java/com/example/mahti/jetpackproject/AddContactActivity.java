@@ -127,6 +127,7 @@ public class AddContactActivity extends AppCompatActivity implements AdapterView
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("cards");
                             myRef.child(user.getUid() + "/" + "imageUrl").setValue(taskSnapshot.getUploadSessionUri().toString());
+                            finish();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
