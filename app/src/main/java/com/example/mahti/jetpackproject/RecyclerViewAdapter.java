@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -42,8 +43,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.card_blood.setText(mData.get(position).getBloodType());
         holder.card_allergy.setText(mData.get(position).getAllergies());
         holder.card_disease.setText(mData.get(position).getUnderlyingDisease());
+        Picasso.with(holder.itemView.getContext()).load(mData.get(position).getImageUrl()).into(holder.card_pic);
 
-        holder.card_pic.setImageResource(mData.get(position).getPicture());
+
+        //holder.card_pic.setImageResource(mData.get(position).getPicture());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

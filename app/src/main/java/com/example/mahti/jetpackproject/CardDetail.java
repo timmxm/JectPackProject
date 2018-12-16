@@ -16,20 +16,20 @@ public class CardDetail {
     private String allergies;
     private String underlyingDisease;
     private String phoneNumber;
-    private int picture;
+    private String imageUrl;
 
     public CardDetail()
     {
 
     }
 
-    public CardDetail(String name, String bloodType, String allergies, String underlyingDisease, String phoneNumber, int picture) {
+    public CardDetail(String name, String bloodType, String allergies, String underlyingDisease, String phoneNumber, String imageUrl) {
         this.name = name;
         this.bloodType = bloodType;
         this.allergies = allergies;
         this.underlyingDisease = underlyingDisease;
         this.phoneNumber = phoneNumber;
-        this.picture = picture;
+        this.imageUrl = imageUrl;
     }
 
     public String getName()
@@ -81,13 +81,13 @@ public class CardDetail {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getPicture()
+    public String getImageUrl()
     {
-        return picture;
+        return imageUrl;
     }
 
-    public void setPicture(int picture)
+    public void setImageUrl(String imageUrl)
     {
-        this.picture = picture;
+        this.imageUrl = imageUrl;
     }
 }
