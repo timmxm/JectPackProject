@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class CardDetailActivity extends AppCompatActivity {
 
     private TextView Ccard_name,Ccard_blood,Ccard_allergy, Ccard_disease, Back_button;
@@ -57,15 +59,15 @@ public class CardDetailActivity extends AppCompatActivity {
         String card_blood = intent.getExtras().getString("card_blood");
         String card_allergy = intent.getExtras().getString("card_allergy");
         String card_disease = intent.getExtras().getString("card_disease");
-        int image = intent.getExtras().getInt("card_pic") ;
+        String image = intent.getExtras().getString("card_pic") ;
         phone_string = getIntent().getExtras().getString("phone_number") + "";
 
         Ccard_name.setText(card_name);
         Ccard_blood.setText(card_blood);
         Ccard_allergy.setText(card_allergy);
         Ccard_disease.setText(card_disease);
-        Ccard_pic.setImageResource(image);
-
+        //Ccard_pic.setImageResource(image);
+        Picasso.with(this).load(image).into(Ccard_pic);
 
         Phone_num.setOnClickListener(new View.OnClickListener() {
             @Override

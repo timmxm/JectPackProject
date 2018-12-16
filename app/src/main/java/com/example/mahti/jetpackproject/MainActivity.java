@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     CardDetail card = dsp.getValue(CardDetail.class);
                     Card1st.add(new CardDetail(card.getName(), card.getBloodType(), card.getAllergies(), card.getUnderlyingDisease(), card.getPhoneNumber(), card.getImageUrl()));
                 }
-                Card1st.remove(0);
+                //Card1st.remove(0);
                 RecyclerView myrv = (RecyclerView) findViewById(R.id.main_recyclerView);
                 LinearLayoutManager horizontalLayoutManager
                         = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Card1st.add(new CardDetail("Loading...", "Loading...", "Loading...", "Loading...", "Loading...", ""));
-        System.out.println("Now");
         RecyclerView myrv = (RecyclerView) findViewById(R.id.main_recyclerView);
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);

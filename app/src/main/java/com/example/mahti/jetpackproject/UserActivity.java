@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 
 public class UserActivity extends AppCompatActivity {
@@ -70,6 +71,8 @@ public class UserActivity extends AppCompatActivity {
                     allergy.setText(card.getAllergies());
                     TextView disease = findViewById(R.id.user_disease);
                     disease.setText(card.getUnderlyingDisease());
+                    ImageView image = findViewById(R.id.user_img);
+                    Picasso.with(getBaseContext()).load(card.getImageUrl()).into(image);
 
                 }
 
