@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.List;
 
 import androidx.cardview.widget.CardView;
@@ -19,7 +21,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<CardDetail> mData ;
 
 
-    public RecyclerViewAdapter(Context mContext, List<CardDetail> mData) {
+    public RecyclerViewAdapter(MainActivity mContext, List<CardDetail> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -36,12 +38,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        holder.card_name.setText(mData.get(position).getcard_name());
-        holder.card_blood.setText(mData.get(position).getcard_blood());
-        holder.card_allergy.setText(mData.get(position).getcard_allergy());
-        holder.card_disease.setText(mData.get(position).getcard_disease());
+        holder.card_name.setText(mData.get(position).getName());
+        holder.card_blood.setText(mData.get(position).getBloodType());
+        holder.card_allergy.setText(mData.get(position).getAllergies());
+        holder.card_disease.setText(mData.get(position).getUnderlyingDisease());
 
-        holder.card_pic.setImageResource(mData.get(position).getcard_pic());
+        holder.card_pic.setImageResource(mData.get(position).getPicture());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,12 +51,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Intent intent = new Intent(mContext,CardDetailActivity.class);
 
                 // passing data to the book activity
-                intent.putExtra("card_name",mData.get(position).getcard_name());
-                intent.putExtra("card_blood",mData.get(position).getcard_blood());
-                intent.putExtra("card_allergy",mData.get(position).getcard_allergy());
-                intent.putExtra("card_disease",mData.get(position).getcard_disease());
-                intent.putExtra("phone_number",mData.get(position).getphone_number());
-                intent.putExtra("card_pic",mData.get(position).getcard_pic());
+                intent.putExtra("card_name",mData.get(position).getName());
+                intent.putExtra("card_blood",mData.get(position).getBloodType());
+                intent.putExtra("card_allergy",mData.get(position).getAllergies());
+                intent.putExtra("card_disease",mData.get(position).getUnderlyingDisease());
+                intent.putExtra("phone_number",mData.get(position).getPhoneNumber());
+                intent.putExtra("card_pic",mData.get(position).getPhoneNumber());
                 // start the activity
                 mContext.startActivity(intent);
 
