@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -46,6 +47,24 @@ public class EditContactActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
 
+        // back
+        ImageView back_icon = findViewById(R.id.edit_back_icon);
+        back_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        // back
+        TextView back  = findViewById(R.id.edit_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         initView();
     }
 
@@ -75,6 +94,7 @@ public class EditContactActivity extends AppCompatActivity implements AdapterVie
         this.disease = findViewById(R.id.edit_disease);
         this.phone = findViewById(R.id.edit_phone);
 
+
         ArrayAdapter<CharSequence> myAdapter = ArrayAdapter.createFromResource(this, R.array.bloodType_array, android.R.layout.simple_spinner_item);
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.bloodType.setAdapter(myAdapter);
@@ -100,6 +120,8 @@ public class EditContactActivity extends AppCompatActivity implements AdapterVie
         cardRef.child(this.user.getUid()).child("allergies").setValue(this.allergy.getText().toString());
         cardRef.child(this.user.getUid()).child("underlyingDisease").setValue(this.disease.getText().toString());
         cardRef.child(this.user.getUid()).child("phoneNumber").setValue(this.phone.getText().toString());
+
+        finish();
     }
 
     private void getImage() {
