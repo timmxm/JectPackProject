@@ -52,6 +52,8 @@ public class EditContactActivity extends AppCompatActivity implements AdapterVie
         this.disease = findViewById(R.id.edit_disease);
         this.phone = findViewById(R.id.edit_phone);
 
+
+
         ArrayAdapter<CharSequence> myAdapter = ArrayAdapter.createFromResource(this, R.array.bloodType_array, android.R.layout.simple_spinner_item);
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.bloodType.setAdapter(myAdapter);
@@ -75,6 +77,8 @@ public class EditContactActivity extends AppCompatActivity implements AdapterVie
         cardRef.child(this.user.getUid()).child("allergies").setValue(this.allergy.getText().toString());
         cardRef.child(this.user.getUid()).child("underlyingDisease").setValue(this.disease.getText().toString());
         cardRef.child(this.user.getUid()).child("phoneNumber").setValue(this.phone.getText().toString());
+
+        finish();
     }
 
     private void toast(String message) {
