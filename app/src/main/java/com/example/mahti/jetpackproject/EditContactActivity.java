@@ -19,8 +19,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -132,30 +135,36 @@ public class EditContactActivity extends AppCompatActivity implements AdapterVie
 
     private void upload() {
         StorageReference storageRef = this.storage.getReference("images");
-        StorageReference imgRef = storageRef.child("images");
 
         if(this.imageUri != null) {
-            StorageReference fileRef = storageRef.child(System.currentTimeMillis()
+            final StorageReference fileRef = storageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(this.imageUri));
-            fileRef.putFile(this.imageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(EditContactActivity.this, "Upload successful",
-                                    Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("cards");
-                            myRef.child(user.getUid() + "/" + "imageUrl").setValue(taskSnapshot.getUploadSessionUri().toString());
-                            finish();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(EditContactActivity.this, "Upload failed",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            UploadTask uploadTask = fileRef.putFile(this.imageUri);
+
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return fileRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if(task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("cards");
+                        myRef.child(user.getUid() + "/" + "imageUrl").setValue(downloadUri.toString());
+                        Toast.makeText(EditContactActivity.this, "Upload successful",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(EditContactActivity.this, "Upload failed",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         } else {
             this.toast("No file selected");
         }
