@@ -1,13 +1,15 @@
 package com.example.mahti.jetpackproject;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,12 +18,15 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 
@@ -36,6 +41,7 @@ public class AddContactActivity extends AppCompatActivity implements AdapterView
     private EditText disease;
     private EditText phone;
     private ImageView cardImage;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +64,7 @@ public class AddContactActivity extends AppCompatActivity implements AdapterView
         this.cardImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                upload();
+                getImage();
             }
         });
 
@@ -71,7 +77,6 @@ public class AddContactActivity extends AppCompatActivity implements AdapterView
         this.allergy = findViewById(R.id.add_allergy);
         this.disease = findViewById(R.id.add_disease);
         this.phone = findViewById(R.id.add_phone);
-
 
         ArrayAdapter<CharSequence> myAdapter = ArrayAdapter.createFromResource(this, R.array.bloodType_array, android.R.layout.simple_spinner_item);
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -90,6 +95,8 @@ public class AddContactActivity extends AppCompatActivity implements AdapterView
             return;
         }
 
+        upload();
+
         DatabaseReference myRef = this.database.getReference("cards");
         myRef.child(this.user.getUid()).child("name").setValue(this.name.getText().toString());
         myRef.child(this.user.getUid()).child("bloodType").setValue(this.bloodType.getSelectedItem().toString());
@@ -98,13 +105,40 @@ public class AddContactActivity extends AppCompatActivity implements AdapterView
         myRef.child(this.user.getUid()).child("phoneNumber").setValue(this.phone.getText().toString());
     }
 
-    private void upload() {
-        StorageReference storageRef = this.storage.getReference();
-        StorageReference imgRef = storageRef.child("images");
-
+    private void getImage() {
         Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(pickPhoto, 1);
+    }
+
+    private void upload() {
+        StorageReference storageRef = this.storage.getReference("images");
+        StorageReference imgRef = storageRef.child("images");
+
+        if(this.imageUri != null) {
+            StorageReference fileRef = storageRef.child(System.currentTimeMillis()
+            + "." + getFileExtension(this.imageUri));
+            fileRef.putFile(this.imageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(AddContactActivity.this, "Upload successful",
+                                    Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("cards");
+                            myRef.child(user.getUid() + "/" + "imageUrl").setValue(taskSnapshot.getUploadSessionUri().toString());
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AddContactActivity.this, "Upload failed",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            this.toast("No file selected");
+        }
     }
 
     private void toast(String message) {
@@ -112,10 +146,19 @@ public class AddContactActivity extends AppCompatActivity implements AdapterView
                 Toast.LENGTH_SHORT).show();
     }
 
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
-        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        this.cardImage.setImageURI(imageReturnedIntent.getData());
+        if(resultCode == RESULT_OK) {
+            super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+            this.cardImage.setImageURI(imageReturnedIntent.getData());
+            this.imageUri = imageReturnedIntent.getData();
+        }
     }
 
     @Override
