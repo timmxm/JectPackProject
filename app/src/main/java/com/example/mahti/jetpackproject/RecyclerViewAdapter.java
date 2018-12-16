@@ -59,7 +59,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("card_allergy",mData.get(position).getAllergies());
                 intent.putExtra("card_disease",mData.get(position).getUnderlyingDisease());
                 intent.putExtra("phone_number",mData.get(position).getPhoneNumber());
-                intent.putExtra("card_pic",mData.get(position).getPhoneNumber());
+                intent.putExtra("card_pic",mData.get(position).getImageUrl());
                 // start the activity
                 mContext.startActivity(intent);
 
