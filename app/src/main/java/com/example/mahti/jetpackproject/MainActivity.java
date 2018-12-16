@@ -5,18 +5,33 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ImageView icon_user;
+
     List<CardDetail> Card1st;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //plz review before merg
+        this.icon_user = (ImageView) findViewById(R.id.icon_user);
+        this.icon_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, UserActivity.class);
+                MainActivity.this.startActivity(i);
+            }
+        });
 
         Card1st = new ArrayList<>();
         Card1st.add(new CardDetail("The Vegitarian","A","book","Aids",R.drawable.contact_pic,"0987654321"));

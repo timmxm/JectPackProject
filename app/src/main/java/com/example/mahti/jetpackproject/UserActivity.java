@@ -41,7 +41,7 @@ public class UserActivity extends AppCompatActivity {
         this.btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(UserActivity.this, RegisterActivity.class);
+                Intent i = new Intent(UserActivity.this, EditContactActivity.class);
                 UserActivity.this.startActivity(i);
             }
         });
