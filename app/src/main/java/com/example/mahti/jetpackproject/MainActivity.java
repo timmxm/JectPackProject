@@ -8,15 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView icon_user;
-
+    private ImageView icon_user;;
     List<CardDetail> Card1st;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(i);
             }
         });
+
 
         Card1st = new ArrayList<>();
         Card1st.add(new CardDetail("The Vegitarian","A","book","Aids",R.drawable.contact_pic,"0987654321"));

@@ -13,6 +13,7 @@ public class CardDetailActivity extends AppCompatActivity {
 
     private TextView Ccard_name,Ccard_blood,Ccard_allergy, Ccard_disease, Back_button;
     private ImageView Ccard_pic, Back_icon, Phone_num;
+
     String phone_string;
 
     private void dialContactPhone(final String phoneNumber) {
@@ -24,8 +25,23 @@ public class CardDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_detail);
 
-        Back_button = (TextView) findViewById(R.id.detail_back);
-        Back_icon = (ImageView) findViewById(R.id.detail_back_icon);
+        // back
+        ImageView back_icon = findViewById(R.id.detail_back_icon);
+        back_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        // back
+        TextView back  = findViewById(R.id.detail_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         Ccard_name = (TextView) findViewById(R.id.detailPrompt_name);
         Ccard_blood = (TextView) findViewById(R.id.detail_blood);
@@ -50,21 +66,6 @@ public class CardDetailActivity extends AppCompatActivity {
         Ccard_disease.setText(card_disease);
         Ccard_pic.setImageResource(image);
 
-        Back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(CardDetailActivity.this, MainActivity.class);
-                CardDetailActivity.this.startActivity(myIntent);
-            }
-        });
-
-        Back_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(CardDetailActivity.this, MainActivity.class);
-                CardDetailActivity.this.startActivity(myIntent);
-            }
-        });
 
         Phone_num.setOnClickListener(new View.OnClickListener() {
             @Override
