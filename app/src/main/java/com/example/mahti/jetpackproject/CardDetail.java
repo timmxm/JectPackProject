@@ -1,7 +1,7 @@
 package com.example.mahti.jetpackproject;
 
 public class CardDetail {
-    private String card_name;
+    /*private String card_name;
     private String cardPrompt_blood;
     private String card_blood;
     private String cardPrompt_allergy;
@@ -9,91 +9,85 @@ public class CardDetail {
     private String cardPrompt_disease;
     private String card_disease;
     private int card_pic;
-    private String phone_number;
+    private String phone_number;*/
 
-    public CardDetail() {
+    private String name;
+    private String bloodType;
+    private String allergies;
+    private String underlyingDisease;
+    private String phoneNumber;
+    private int picture;
+
+    public CardDetail()
+    {
+
     }
 
-    public CardDetail(String card_name, String card_blood, String card_allergy, String card_disease, int card_pic,String phone_number) {
-        this.card_name = card_name;
-        this.card_blood = card_blood;
-        this.card_allergy = card_allergy;
-        this.card_disease = card_disease;
-        this.card_pic = card_pic;
-        this.phone_number = phone_number;
+    public CardDetail(String name, String bloodType, String allergies, String underlyingDisease, String phoneNumber, int picture) {
+        this.name = name;
+        this.bloodType = bloodType;
+        this.allergies = allergies;
+        this.underlyingDisease = underlyingDisease;
+        this.phoneNumber = phoneNumber;
+        this.picture = picture;
     }
 
-
-    public String getcard_name() {
-        return this.card_name;
+    public String getName()
+    {
+        return name;
     }
 
-    public String getcardPrompt_blood() {
-        return this.cardPrompt_blood;
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
-    public String getcard_blood() {
-        return this.card_blood;
+    public String getBloodType()
+    {
+        return  bloodType;
     }
 
-    public String getcardPrompt_allergy() {
-        return this.cardPrompt_allergy;
+    public void setBloodType(String bloodType)
+    {
+        this.bloodType = bloodType;
     }
 
-    public String getcard_allergy() {
-        return this.card_allergy;
+    public String getAllergies()
+    {
+        return allergies;
     }
 
-    public String getcardPrompt_disease() {
-        return this.cardPrompt_disease;
+    public void setAllergies(String allergies)
+    {
+        this.allergies = allergies;
     }
 
-    public String getcard_disease() {
-        return this.card_disease;
+    public String getUnderlyingDisease(){
+        return underlyingDisease;
     }
 
-    public int getcard_pic() {
-        return this.card_pic;
+    public void setUnderlyingDisease(String underlyingDisease)
+    {
+        this.underlyingDisease = underlyingDisease;
     }
 
-    public String getphone_number() {
-        return this.phone_number;
+    public String getPhoneNumber()
+    {
+        return phoneNumber;
     }
 
-
-    public void setcard_name(String card_name) {
-        this.card_name = card_name;
+    public void setPhoneNumber(String phoneNumber)
+    {
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setcardPrompt_blood(String cardPrompt_blood) {
-        this.cardPrompt_blood = cardPrompt_blood;
+    public int getPicture()
+    {
+        return picture;
     }
 
-    public void setcard_blood(String card_blood) {
-        this.card_blood = card_blood;
-    }
-
-    public void setcardPrompt_allergy(String cardPrompt_allergy) {
-        this.cardPrompt_allergy = cardPrompt_allergy;
-    }
-
-    public void setcard_allergy(String card_allergy) {
-        this.card_allergy = card_allergy;
-    }
-
-    public void setcardPrompt_disease(String cardPrompt_disease) {
-        this.cardPrompt_disease = cardPrompt_disease;
-    }
-
-    public void setcard_disease(String card_disease) {
-        this.card_disease = card_disease;
-    }
-
-    public void setcard_pic(int card_pic) {
-        this.card_pic = card_pic;
-    }
-
-    public void setphone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPicture(int picture)
+    {
+        this.picture = picture;
     }
 }
